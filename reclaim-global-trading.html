@@ -542,7 +542,7 @@
   setTimeout(finish, 1500);
 })();
 </script>
-<a href="#main-content" class="skip-link">跳至主內容 / Skip to main content</a>
+<a href="#main-content" class="skip-link" data-i18n="skip_link">Skip to main content</a>
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <nav>
@@ -585,7 +585,7 @@
   <div class="hero-inner">
     <div class="hero-text fade-in-left">
       <div class="hero-tag"><span class="dot"></span> <span data-i18n="hero_tag">Hong Kong Used Phone Trading Desk</span></div>
-      <h1 data-i18n="hero_title">Where old phones find their <span class="accent">true market.</span></h1>
+      <h1 data-i18n="hero_title">We buy faulty & old smartphones — <span class="accent">any condition accepted.</span></h1>
       <p class="lead" data-i18n="hero_desc">Uni-Recycle Go connects reliable suppliers of used smartphones across the UK, USA, Europe and Asia with buyer demand in Hong Kong and mainland China. We source, inspect and coordinate — so you can trade with confidence.</p>
       <div class="hero-buttons">
         <a href="#contact" class="btn btn-primary"><span data-i18n="hero_btn1">Submit Supplier Enquiry</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -965,7 +965,7 @@
   <div class="chat-messages" id="chatMessages"></div>
   <div class="chat-quick" id="chatQuick"></div>
   <div class="chat-input-area">
-    <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." aria-label="Chat message input" onkeydown="if(event.key==='Enter')sendChatMsg()">
+    <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." data-i18n-ph="chat_placeholder" aria-label="Chat message input" onkeydown="if(event.key==='Enter')sendChatMsg()">
     <button class="chat-send" aria-label="Send message" onclick="sendChatMsg()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
   </div>
 </div>
@@ -1351,15 +1351,14 @@ document.addEventListener("keydown", function(e) {
 
 const I18N = {
 en: {
-meta_title:"Uni-Recycle Go — Faulty & Old Smartphone Buyer | HK & China",
+meta_title:"Uni-Recycle Go — Faulty & Old Smartphone Buyer | HK & China", skip_link:"Skip to main content", chat_placeholder:"Type your message...",
 meta_desc:"Hong Kong & China-based buyer of faulty, non-functional and old smartphones. We purchase all brands — iPhone, Samsung, Google Pixel, Huawei, Xiaomi, OPPO and more. We also buy used parts and components. Southeast Asia suppliers welcome.",
-location:"Hong Kong / China", wechat_us:"WeChat Us →",
+location:"Hong Kong / China",
 nav_about:"About", nav_products:"Products", nav_grading:"Grading", nav_quality:"Quality", nav_process:"Process", nav_faq:"FAQ", nav_quote:"Get a Quote", nav_contact:"Contact Us",
 hero_tag:"HK & China · Faulty & Old Phone Specialist",
 hero_title:'We buy faulty & old smartphones — <span class="accent">any condition accepted.</span>',
 hero_desc:"Uni-Recycle Go is a Hong Kong and China-based buyer specialising in faulty, non-functional and old smartphones. We purchase devices in bulk — all brands: iPhone, Samsung Galaxy, Google Pixel, Huawei, Xiaomi, OPPO, OnePlus and more. Old models, dead boards, cracked screens and fully faulty units are our core focus. We also buy used parts and components. Most stock is Grade F / faulty units.",
 hero_btn1:"Submit Supplier Enquiry", hero_btn2:"View Grading Standards",
-stat1:"HK + CN BASED", stat2:"GLOBAL + SEA", stat3:"24h RESPONSE", stat4:"F GRADE / PARTS",
 grade_a:"GRADE A", grade_b:"GRADE B", grade_c:"GRADE C",
 grade_a_desc:"Tested & Graded<br>Ready for Export", grade_b_desc:"Fully Tested<br>Minor Cosmetics", grade_c_desc:"Functional<br>Visible Wear",
 badge1:"Container Loads", badge1_sub:"Monthly Shipments", badge2:"Parts Grading", badge2_sub:"F Grade Focus",
@@ -1432,24 +1431,23 @@ form_title:"Send Your Enquiry", form_sub:"Fill in the form below and we'll respo
 form_name:"Your Name *", form_company:"Company", form_email:"Email *", form_country:"Country",
 form_brand:"Primary Brand", form_brand_ph:"Select brand", form_brand_other:"Other / Mixed",
 form_qty:"Approx. Quantity", form_qty_ph:"Select range", form_desc:"Stock Description *", form_submit:"Send Enquiry →",
-form_note:"We respond to all enquiries within 24 business hours. Your information is kept confidential.", form_sending:"Sending...", form_success:"Thank you! We received your enquiry and will get back to you within 24 hours.", form_error:"Sorry, something went wrong. Please email us directly at unirecyclego@outlook.com", val_required:"Please fill in this field.", val_email:"Please enter a valid email address.",
+form_note:"We respond to all enquiries within 24 business hours. Your information is kept confidential.", form_sending:"Sending...", form_success:"Thank you! We received your enquiry and will get back to you within 24 hours.", form_error:"Sorry, something went wrong. Please email us directly at unirecyclego@outlook.com",
 footer_brand_desc:"Hong Kong & China-based used smartphone buyer. Samsung Galaxy specialists — working, faulty and cracked-screen units purchased. Active in Southeast Asia market.",
 footer_company:"COMPANY", footer_why:"Why Choose Us", footer_how:"How It Works", footer_contact:"Contact",
 footer_source:"WE SOURCE", footer_grading:"Grading Standards",
 footer_resources:"RESOURCES", footer_qc:"Quality Control", footer_shipping:"Shipping & Logistics", footer_gradedef:"Grade Definitions",
   
-footer_rights:"All rights reserved.", footer_privacy:"Privacy Policy", footer_terms:"Terms of Service"
+footer_rights:"All rights reserved.",
 },
 "zh-Hant": {
-meta_title:"Uni-Recycle Go — 故障及舊手機收購 | 香港及中國",
+meta_title:"Uni-Recycle Go — 故障及舊手機收購 | 香港及中國", skip_link:"跳至主內容", chat_placeholder:"輸入您的訊息...",
 meta_desc:"香港及中國故障、無功能及舊型號智能手機買家。收購所有品牌——iPhone、Samsung、Google Pixel、Huawei、Xiaomi、OPPO 等。我們亦收購舊零件及組件。東南亞供應商歡迎。",
-location:"香港 / 中國", wechat_us:"WeChat 聯絡 →",
+location:"香港 / 中國",
 nav_about:"關於我們", nav_products:"產品", nav_grading:"分級標準", nav_quality:"品質檢測", nav_process:"流程", nav_faq:"常見問題", nav_quote:"獲取報價", nav_contact:"聯絡我們",
 hero_tag:"香港及中國 · 故障舊機專家",
 hero_title:'我們收購故障及舊手機——<span class="accent">任何狀況都收。</span>',
 hero_desc:"Uni-Recycle Go 是一家總部位於香港及中國的故障、無功能及舊型號智能手機買家。我們批量收購設備——所有品牌——iPhone、Samsung Galaxy、Google Pixel、Huawei、Xiaomi、OPPO、OnePlus 等。舊型號、壞板、裂屏及完全故障機是我們的核心聚焦。我們亦收購舊零件及組件。大部份貨源為 F 級/故障機。",
 hero_btn1:"提交供應商查詢", hero_btn2:"查看分級標準",
-stat1:"港中基地", stat2:"全球+東南亞", stat3:"24小時回覆", stat4:"F級/零件",
 grade_a:"A級", grade_b:"B級", grade_c:"C級",
 grade_a_desc:"已檢測分級<br>可出口", grade_b_desc:"完全檢測<br>輕微外觀", grade_c_desc:"功能正常<br>可見磨損",
 badge1:"整櫃裝運", badge1_sub:"每月發貨", badge2:"零件分級", badge2_sub:"F級為主",
@@ -1522,24 +1520,23 @@ form_title:"發送您的查詢", form_sub:"填寫以下表單，我們將在 24 
 form_name:"您的姓名 *", form_company:"公司", form_email:"電郵 *", form_country:"國家",
 form_brand:"主要品牌", form_brand_ph:"選擇品牌", form_brand_other:"其他 / 混合",
 form_qty:"大約數量", form_qty_ph:"選擇範圍", form_desc:"庫存描述 *", form_submit:"發送查詢 →",
-form_note:"我們在 24 個工作小時內回覆所有查詢。您的資料將保密。", form_sending:"發送中...", form_success:"感謝您！已收到您的查詢，我們會在 24 小時內回覆。", form_error:"抱歉，發送失敗。請直接發電郵至 unirecyclego@outlook.com", val_required:"請填寫此欄位。", val_email:"請輸入有效的電郵地址。",
+form_note:"我們在 24 個工作小時內回覆所有查詢。您的資料將保密。", form_sending:"發送中...", form_success:"感謝您！已收到您的查詢，我們會在 24 小時內回覆。", form_error:"抱歉，發送失敗。請直接發電郵至 unirecyclego@outlook.com",
 footer_brand_desc:"香港及中國二手智能手機買家。Samsung Galaxy 專家——正常、故障及裂屏機均收購。活躍於東南亞市場。",
 footer_company:"公司", footer_why:"為什麼選擇我們", footer_how:"運作流程", footer_contact:"聯絡我們",
 footer_source:"我們收購", footer_grading:"分級標準",
 footer_resources:"資源", footer_qc:"品質檢測", footer_shipping:"裝運與物流", footer_gradedef:"等級定義",
   
-footer_rights:"版權所有。", footer_privacy:"隱私政策", footer_terms:"服務條款"
+footer_rights:"版權所有。",
 },
 "zh-Hans": {
-meta_title:"Uni-Recycle Go — 二手 Samsung 及手机收购 | 香港及中国",
+meta_title:"Uni-Recycle Go — 二手 Samsung 及手机收购 | 香港及中国", skip_link:"跳至主内容", chat_placeholder:"输入您的消息...",
 meta_desc:"香港及中国二手智能手机买家。专营 Samsung Galaxy——正常、故障及裂屏机均收购。东南亚市场拓展中。",
-location:"香港 / 中国", wechat_us:"WeChat 联络 →",
+location:"香港 / 中国",
 nav_about:"关于我们", nav_products:"产品", nav_grading:"分级标准", nav_quality:"品质检测", nav_process:"流程", nav_faq:"常见问题", nav_quote:"获取报价", nav_contact:"联系我们",
 hero_tag:"香港及中国 · Samsung 专家",
 hero_title:'我们收购二手智能手机——<span class="accent">任何品牌，任何状况。</span>',
 hero_desc:"Uni-Recycle Go 是一家总部位于香港及中国的二手智能手机买家，核心聚焦 Samsung Galaxy。我们从全球供应商（包括东南亚）批量收购正常、故障及裂屏设备，并负责分级、物流和付款，让您安心贸易。",
 hero_btn1:"提交供应商查询", hero_btn2:"查看分级标准",
-stat1:"港中基地", stat2:"全球+东南亚", stat3:"24小时回复", stat4:"A/B/C/F分级",
 grade_a:"A级", grade_b:"B级", grade_c:"C级",
 grade_a_desc:"已检测分级<br>可出口", grade_b_desc:"完全检测<br>轻微外观", grade_c_desc:"功能正常<br>可见磨损",
 badge1:"整柜装运", badge1_sub:"每月发货", badge2:"品质检验", badge2_sub:"每批必检",
@@ -1612,24 +1609,23 @@ form_title:"发送您的查询", form_sub:"填写以下表单，我们将在 24 
 form_name:"您的姓名 *", form_company:"公司", form_email:"电邮 *", form_country:"国家",
 form_brand:"主要品牌", form_brand_ph:"选择品牌", form_brand_other:"其他 / 混合",
 form_qty:"大约数量", form_qty_ph:"选择范围", form_desc:"库存描述 *", form_submit:"发送查询 →",
-form_note:"我们在 24 个工作小时内回复所有查询。您的资料将保密。", form_sending:"发送中...", form_success:"感谢您！已收到您的查询，我们会在 24 小时内回复。", form_error:"抱歉，发送失败。请直接发电邮至 unirecyclego@outlook.com", val_required:"请填写此字段。", val_email:"请输入有效的电子邮件地址。",
+form_note:"我们在 24 个工作小时内回复所有查询。您的资料将保密。", form_sending:"发送中...", form_success:"感谢您！已收到您的查询，我们会在 24 小时内回复。", form_error:"抱歉，发送失败。请直接发电邮至 unirecyclego@outlook.com",
 footer_brand_desc:"香港及中国二手智能手机买家。Samsung Galaxy 专家——正常、故障及裂屏机均收购。活跃于东南亚市场。",
 footer_company:"公司", footer_why:"为什么选择我们", footer_how:"运作流程", footer_contact:"联络我们",
 footer_source:"我们收购", footer_grading:"分级标准",
 footer_resources:"资源", footer_qc:"品质检测", footer_shipping:"装运与物流", footer_gradedef:"等级定义",
   
-footer_rights:"版权所有。", footer_privacy:"隐私政策", footer_terms:"服务条款"
+footer_rights:"版权所有。",
 },
 ko: {
-meta_title:"Uni-Recycle Go — 중고 Samsung 및 스마트폰 매입 | 홍콩 및 중국",
+meta_title:"Uni-Recycle Go — 중고 Samsung 및 스마트폰 매입 | 홍콩 및 중국", skip_link:"본문으로 건너뛰기", chat_placeholder:"메시지를 입력하세요...",
 meta_desc:"홍콩 및 중국 기반 중고 스마트폰 구매자. Samsung Galaxy 전문 — 정상, 불량, 액정 깨짐 기기 모두 매입. 동남아 시장 확장 중.",
-location:"홍콩 / 중국", wechat_us:"위챗 문의 →",
+location:"홍콩 / 중국",
 nav_about:"회사소개", nav_products:"제품", nav_grading:"등급기준", nav_quality:"품질검사", nav_process:"프로세스", nav_faq:"자주묻는질문", nav_quote:"견적요청", nav_contact:"문의하기",
 hero_tag:"홍콩 및 중국 · Samsung 전문",
 hero_title:'중고 스마트폰 매입——<span class="accent">모든 브랜드, 모든 상태.</span>',
 hero_desc:"Uni-Recycle Go은 홍콩 및 중국 기반 중고 스마트폰 구매자로, Samsung Galaxy를 핵심으로 합니다. 동남아를 포함한 전 세계 공급업체로부터 정상, 불량, 액정 깨짐 기기를 대량 매입하며 등급, 물류, 결제까지 처리하여 안심하고 거래하실 수 있습니다.",
 hero_btn1:"공급업체 문의 제출", hero_btn2:"등급 기준 보기",
-stat1:"홍콩+중국", stat2:"글로벌+동남아", stat3:"24시간 응답", stat4:"A/B/C/F등급",
 grade_a:"A등급", grade_b:"B등급", grade_c:"C등급",
 grade_a_desc:"검사 및 등급 완료<br>수출 준비", grade_b_desc:"완전 검사됨<br>경미한 외관", grade_c_desc:"기능 정상<br>눈에 띄는 마모",
 badge1:"컨테이너 선적", badge1_sub:"월간 출하", badge2:"QC 검사", badge2_sub:"매批次 필수",
@@ -1702,24 +1698,23 @@ form_title:"문의 보내기", form_sub:"아래 양식을 작성하시면 24영�
 form_name:"성함 *", form_company:"회사", form_email:"이메일 *", form_country:"국가",
 form_brand:"주요 브랜드", form_brand_ph:"브랜드 선택", form_brand_other:"기타 / 혼합",
 form_qty:"예상 수량", form_qty_ph:"범위 선택", form_desc:"재고 설명 *", form_submit:"문의 보내기 →",
-form_note:"모든 문의에 24영업시간 이내 응답합니다. 귀하의 정보는 기밀로 유지됩니다.", form_sending:"전송 중...", form_success:"감사합니다! 문의가 접수되었습니다. 24시간 이내에 연락드리겠습니다.", form_error:"죄송합니다, 전송에 실패했습니다. unirecyclego@outlook.com으로 직접 이메일을 보내주세요.", val_required:"이 필드를 입력해 주세요.", val_email:"유효한 이메일 주소를 입력해 주세요.",
+form_note:"모든 문의에 24영업시간 이내 응답합니다. 귀하의 정보는 기밀로 유지됩니다.", form_sending:"전송 중...", form_success:"감사합니다! 문의가 접수되었습니다. 24시간 이내에 연락드리겠습니다.", form_error:"죄송합니다, 전송에 실패했습니다. unirecyclego@outlook.com으로 직접 이메일을 보내주세요.",
 footer_brand_desc:"홍콩 및 중국 기반 중고 스마트폰 구매자. Samsung Galaxy 전문 — 정상, 불량, 액정 깨짐 기기 모두 매입. 동남아 시장에서 활발히 활동.",
 footer_company:"회사", footer_why:"왜 우리를 선택", footer_how:"진행 방식", footer_contact:"연락처",
 footer_source:"우리가 사는 것", footer_grading:"등급 기준",
 footer_resources:"리소스", footer_qc:"품질 관리", footer_shipping:"선적 및 물류", footer_gradedef:"등급 정의",
   
-footer_rights:"모든 권리 보유.", footer_privacy:"개인정보 처리방침", footer_terms:"서비스 약관"
+footer_rights:"모든 권리 보유.",
 },
 ja: {
-meta_title:"Uni-Recycle Go — 中古 Samsung ・スマホ買取 | 香港・中国",
+meta_title:"Uni-Recycle Go — 中古 Samsung ・スマホ買取 | 香港・中国", skip_link:"メインコンテンツへスキップ", chat_placeholder:"メッセージを入力...",
 meta_desc:"香港・中国を拠点とする中古スマートフォン買取業者。Samsung Galaxy専門 — 正常・不良・画面割れ端末すべて買取。東南アジア市場展開中。",
-location:"香港 / 中国", wechat_us:"WeChatで問い合わせ →",
+location:"香港 / 中国",
 nav_about:"会社概要", nav_products:"製品", nav_grading:"グレード基準", nav_quality:"品質管理", nav_process:"プロセス", nav_faq:"よくある質問", nav_quote:"見積もり依頼", nav_contact:"お問い合わせ",
 hero_tag:"香港・中国 · Samsung専門",
 hero_title:'中古スマートフォン買取——<span class="accent">ブランド・状態不問。</span>',
 hero_desc:"Uni-Recycle Goは香港・中国を拠点とする中古スマートフォン買取業者で、Samsung Galaxyを中核としています。東南アジアを含む世界中のサプライヤーから正常・不良・画面割れ端末を一括買取し、グレード・物流・支払いまで対応するので安心して取引できます。",
 hero_btn1:"サプライヤー問い合わせ", hero_btn2:"グレード基準を見る",
-stat1:"香港+中国拠点", stat2:"グローバル+東南アジア", stat3:"24時間回答", stat4:"A/B/C/Fグレード",
 grade_a:"Aグレード", grade_b:"Bグレード", grade_c:"Cグレード",
 grade_a_desc:"検品・グレード済み<br>輸出可能", grade_b_desc:"完全検品済み<br>軽微な外観", grade_c_desc:"機能正常<br>目に見える摩耗",
 badge1:"コンテナ積載", badge1_sub:"月次出荷", badge2:"QC検査", badge2_sub:"全ロット必須",
@@ -1792,24 +1787,23 @@ form_title:"お問い合わせを送信", form_sub:"以下のフォームにご�
 form_name:"お名前 *", form_company:"会社名", form_email:"メール *", form_country:"国",
 form_brand:"主なブランド", form_brand_ph:"ブランドを選択", form_brand_other:"その他 / 混合",
 form_qty:"おおよその数量", form_qty_ph:"範囲を選択", form_desc:"在庫の説明 *", form_submit:"お問い合わせを送信 →",
-form_note:"すべてのお問い合わせに24営業時間以内に回答します。お客様の情報は機密として保持されます。", form_sending:"送信中...", form_success:"ありがとうございます！お問い合わせを受け付けました。24時間以内にご連絡いたします。", form_error:"申し訳ありません、送信に失敗しました。unirecyclego@outlook.comまで直接メールをお願いします。", val_required:"この項目を入力してください。", val_email:"有効なメールアドレスを入力してください。",
+form_note:"すべてのお問い合わせに24営業時間以内に回答します。お客様の情報は機密として保持されます。", form_sending:"送信中...", form_success:"ありがとうございます！お問い合わせを受け付けました。24時間以内にご連絡いたします。", form_error:"申し訳ありません、送信に失敗しました。unirecyclego@outlook.comまで直接メールをお願いします。",
 footer_brand_desc:"香港・中国を拠点とする中古スマートフォン買取業者。Samsung Galaxy専門 — 正常・不良・画面割れ端末すべて買取。東南アジア市場で活発に活動。",
 footer_company:"会社", footer_why:"選ばれる理由", footer_how:"ご利用の流れ", footer_contact:"お問い合わせ",
 footer_source:"当社が買い取るもの", footer_grading:"グレード基準",
 footer_resources:"リソース", footer_qc:"品質管理", footer_shipping:"出荷・物流", footer_gradedef:"グレード定義",
   
-footer_rights:"無断複写・転載を禁じます。", footer_privacy:"プライバシーポリシー", footer_terms:"利用規約"
+footer_rights:"無断複写・転載を禁じます。",
 },
 th: {
-meta_title:"Uni-Recycle Go — ซื้อ Samsung และสมาร์ทโฟนมือสอง | ฮ่องกงและจีน",
+meta_title:"Uni-Recycle Go — ซื้อ Samsung และสมาร์ทโฟนมือสอง | ฮ่องกงและจีน", skip_link:"ข้ามไปยังเนื้อหาหลัก", chat_placeholder:"พิมพ์ข้อความของคุณ...",
 meta_desc:"ผู้ซื้อสมาร์ทโฟนมือสองจากฮ่องกงและจีน เชี่ยวชาญด้าน Samsung Galaxy — ซื้อทั้งเครื่องใช้ได้ เสีย และจอแตก กำลังขยายตลาดเอเชียตะวันออกเฉียงใต้",
-location:"ฮ่องกง / จีน", wechat_us:"ติดต่อ WeChat →",
+location:"ฮ่องกง / จีน",
 nav_about:"เกี่ยวกับเรา", nav_products:"ผลิตภัณฑ์", nav_grading:"เกรด", nav_quality:"คุณภาพ", nav_process:"ขั้นตอน", nav_faq:"คำถาม", nav_quote:"ขอใบเสนอราคา", nav_contact:"ติดต่อเรา",
 hero_tag:"ฮ่องกงและจีน · ผู้เชี่ยวชาญ Samsung",
 hero_title:'เราซื้อสมาร์ทโฟนมือสอง——<span class="accent">ทุกยี่ห้อ ทุกสภาพ</span>',
 hero_desc:"Uni-Recycle Go เป็นผู้ซื้อสมาร์ทโฟนมือสองจากฮ่องกงและจีน เน้นเป็นพิเศษที่ Samsung Galaxy เราซื้อเครื่องใช้ได้ เสีย และจอแตกเป็นจำนวนมากจากผู้ขายทั่วโลก รวมถึงเอเชียตะวันออกเฉียงใต้ และดูแลเรื่องเกรด โลจิสติกส์ และการชำระเงิน ให้คุณค้าขายด้วยความมั่นใจ",
 hero_btn1:"ส่งคำสอบถามผู้ขาย", hero_btn2:"ดูเกรดมาตรฐาน",
-stat1:"ฮ่องกง+จีน", stat2:"ทั่วโลก+เอเชียตะวันออกเฉียงใต้", stat3:"ตอบกลับ 24 ชม.", stat4:"เกรด A/B/C/F",
 grade_a:"เกรด A", grade_b:"เกรด B", grade_c:"เกรด C",
 grade_a_desc:"ตรวจสอบและจัดเกรดแล้ว<br>พร้อมส่งออก", grade_b_desc:"ตรวจสอบครบถ้วน<br>รอยขีดข่วนเล็กน้อย", grade_c_desc:"ใช้งานได้ปกติ<br>มีรอยใช้งานเห็นได้",
 badge1:"ส่งเป็นคอนเทนเนอร์", badge1_sub:"ส่งทุกเดือน", badge2:"ตรวจสอบ QC", badge2_sub:"ทุกชุดสินค้า",
@@ -1882,24 +1876,23 @@ form_title:"ส่งคำสอบถามของคุณ", form_sub:"ก�
 form_name:"ชื่อของคุณ *", form_company:"บริษัท", form_email:"อีเมล *", form_country:"ประเทศ",
 form_brand:"ยี่ห้อหลัก", form_brand_ph:"เลือกยี่ห้อ", form_brand_other:"อื่นๆ / ผสม",
 form_qty:"จำนวนโดยประมาณ", form_qty_ph:"เลือกช่วง", form_desc:"คำอธิบายสต็อก *", form_submit:"ส่งคำสอบถาม →",
-form_note:"เราตอบกลับคำสอบถามทั้งหมดภายใน 24 ชั่วโมงทำการ ข้อมูลของคุณจะถูกเก็บเป็นความลับ", form_sending:"กำลังส่ง...", form_success:"ขอบคุณครับ! ได้รับคำสอบถามของคุณแล้ว เราจะตอบกลับภายใน 24 ชั่วโมง", form_error:"ขออภัย ส่งไม่สำเร็จ กรุณาอีเมลไปที่ unirecyclego@outlook.com โดยตรง", val_required:"กรุณากรอกช่องนี้", val_email:"กรุณากรอกที่อยู่อีเมลที่ถูกต้อง",
+form_note:"เราตอบกลับคำสอบถามทั้งหมดภายใน 24 ชั่วโมงทำการ ข้อมูลของคุณจะถูกเก็บเป็นความลับ", form_sending:"กำลังส่ง...", form_success:"ขอบคุณครับ! ได้รับคำสอบถามของคุณแล้ว เราจะตอบกลับภายใน 24 ชั่วโมง", form_error:"ขออภัย ส่งไม่สำเร็จ กรุณาอีเมลไปที่ unirecyclego@outlook.com โดยตรง",
 footer_brand_desc:"ผู้ซื้อสมาร์ทโฟนมือสองจากฮ่องกงและจีน ผู้เชี่ยวชาญ Samsung Galaxy — ซื้อทั้งเครื่องใช้ได้ เสีย และจอแตก กิจกรรมในตลาดเอเชียตะวันออกเฉียงใต้",
 footer_company:"บริษัท", footer_why:"ทำไมต้องเลือกเรา", footer_how:"วิธีการทำงาน", footer_contact:"ติดต่อเรา",
 footer_source:"สิ่งที่เราซื้อ", footer_grading:"เกรดมาตรฐาน",
 footer_resources:"ทรัพยากร", footer_qc:"การควบคุมคุณภาพ", footer_shipping:"การจัดส่งและโลจิสติกส์", footer_gradedef:"คำจำกัดความเกรด",
   
-footer_rights:"สงวนลิขสิทธิ์", footer_privacy:"นโยบายความเป็นส่วนตัว", footer_terms:"เงื่อนไขการให้บริการ"
+footer_rights:"สงวนลิขสิทธิ์",
 },
 fr: {
-meta_title:"Uni-Recycle Go — Achat Samsung & smartphones d'occasion | HK & Chine",
+meta_title:"Uni-Recycle Go — Achat Samsung & smartphones d'occasion | HK & Chine", skip_link:"Aller au contenu principal", chat_placeholder:"Tapez votre message...",
 meta_desc:"Acheteur de smartphones d'occasion basé à Hong Kong et en Chine. Spécialiste Samsung Galaxy — appareils fonctionnels, défectueux et à écran fissuré tous achetés. Expansion du marché Asie du Sud-Est.",
-location:"Hong Kong / Chine", wechat_us:"Contact WeChat →",
+location:"Hong Kong / Chine",
 nav_about:"À propos", nav_products:"Produits", nav_grading:"Gradation", nav_quality:"Qualité", nav_process:"Processus", nav_faq:"FAQ", nav_quote:"Obtenir un devis", nav_contact:"Contactez-nous",
 hero_tag:"HK & Chine · Spécialiste Samsung",
 hero_title:'Nous achetons des smartphones d\'occasion — <span class="accent">toutes marques, tous états.</span>',
 hero_desc:"Uni-Recycle Go est un acheteur de smartphones d'occasion basé à Hong Kong et en Chine, avec un focus principal sur Samsung Galaxy. Nous achetons en gros des appareils fonctionnels, défectueux et à écran fissuré auprès de fournisseurs du monde entier — y compris l'Asie du Sud-Est — et gérons la gradation, la logistique et le paiement pour que vous puissiez trader en toute confiance.",
 hero_btn1:"Soumettre une demande fournisseur", hero_btn2:"Voir les normes de gradation",
-stat1:"HK + CN", stat2:"MONDIAL + ASE", stat3:"RÉPONSE 24H", stat4:"GRADES A/B/C/F",
 grade_a:"GRADE A", grade_b:"GRADE B", grade_c:"GRADE C",
 grade_a_desc:"Testé et gradé<br>Prêt à l'export", grade_b_desc:"Entièrement testé<br>Cosmétique mineure", grade_c_desc:"Fonctionnel<br>Usure visible",
 badge1:"Chargements conteneurs", badge1_sub:"Expéditions mensuelles", badge2:"Inspection QC", badge2_sub:"Chaque lot",
@@ -1972,13 +1965,13 @@ form_title:"Envoyez votre demande", form_sub:"Remplissez le formulaire ci-dessou
 form_name:"Votre nom *", form_company:"Entreprise", form_email:"Email *", form_country:"Pays",
 form_brand:"Marque principale", form_brand_ph:"Sélectionner une marque", form_brand_other:"Autre / Mixte",
 form_qty:"Quantité approximative", form_qty_ph:"Sélectionner une plage", form_desc:"Description du stock *", form_submit:"Envoyer la demande →",
-form_note:"Nous répondons à toutes les demandes dans les 24 heures ouvrables. Vos informations sont gardées confidentielles.", form_sending:"Envoi en cours...", form_success:"Merci ! Votre demande a bien été reçue. Nous vous répondrons sous 24 heures.", form_error:"Désolé, une erreur est survenue. Veuillez nous écrire directement à unirecyclego@outlook.com", val_required:"Veuillez remplir ce champ.", val_email:"Veuillez saisir une adresse e-mail valide.",
+form_note:"Nous répondons à toutes les demandes dans les 24 heures ouvrables. Vos informations sont gardées confidentielles.", form_sending:"Envoi en cours...", form_success:"Merci ! Votre demande a bien été reçue. Nous vous répondrons sous 24 heures.", form_error:"Désolé, une erreur est survenue. Veuillez nous écrire directement à unirecyclego@outlook.com",
 footer_brand_desc:"Acheteur de smartphones d'occasion basé à Hong Kong et en Chine. Spécialiste Samsung Galaxy — appareils fonctionnels, défectueux et à écran fissuré tous achetés. Actif sur le marché Asie du Sud-Est.",
 footer_company:"ENTREPRISE", footer_why:"Pourquoi nous choisir", footer_how:"Comment ça marche", footer_contact:"Contact",
 footer_source:"NOUS ACHETONS", footer_grading:"Normes de gradation",
 footer_resources:"RESSOURCES", footer_qc:"Contrôle qualité", footer_shipping:"Expédition & Logistique", footer_gradedef:"Définitions des grades",
   
-footer_rights:"Tous droits réservés.", footer_privacy:"Politique de confidentialité", footer_terms:"Conditions d'utilisation"
+footer_rights:"Tous droits réservés.",
 }
 };
 
@@ -2018,6 +2011,10 @@ function setLang(lang, savePref) {
         el.innerHTML = dict[key];
       }
     }
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => {
+    const key = el.getAttribute("data-i18n-ph");
+    if (dict[key] !== undefined) el.setAttribute("placeholder", dict[key]);
   });
   document.getElementById("currentLang").textContent = LANG_CODES[lang] || "EN";
   document.querySelectorAll(".lang-option").forEach(opt => {
