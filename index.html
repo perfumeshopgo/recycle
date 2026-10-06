@@ -1143,7 +1143,8 @@ function initChat() {
     setTimeout(() => addChatMsg(t("chatbot_offline_msg"), "bot"), 600);
   }
   // 如果 AI 已启用，添加 AI 提示
-  if (aiEnabled) {
+  if (AI_WORKER_URL && AI_WORKER_URL.trim() !== "") {
+    aiEnabled = true;
     setTimeout(() => {
       addChatMsg(t("ai_welcome") || "AI Assistant is active. Choose a mode above: Customer Service, Translation, Marketing, or Operations.", "bot");
     }, 1200);
@@ -1334,7 +1335,9 @@ function sendChatMsg() {
   input.value = "";
   // 记录到对话历史
   chatHistory.push({ role: "user", content: text });
-  if (aiEnabled && AI_WORKER_URL) {
+  // 直接检查 AI_WORKER_URL，不依赖 aiEnabled 变量
+  if (AI_WORKER_URL && AI_WORKER_URL.trim() !== "") {
+    aiEnabled = true;
     botReplyAi(text);
   } else {
     setTimeout(() => botReply(text), 800);
@@ -1392,7 +1395,8 @@ function switchAiMode(mode) {
     marketing: t("ai_mode_marketing") || "Marketing",
     operations: t("ai_mode_ops") || "Operations"
   };
-  if (aiEnabled && AI_WORKER_URL) {
+  if (AI_WORKER_URL && AI_WORKER_URL.trim() !== "") {
+    aiEnabled = true;
     addChatMsg((t("ai_mode_switched") || "Switched to") + " " + (modeNames[mode] || mode) + " " + (t("ai_mode_assistant") || "AI Assistant") + ". " + (t("ai_mode_hint") || "How can I help you?"), "bot");
   }
 }
@@ -1479,6 +1483,9 @@ function addAiChatMsg(text, mode) {
 function initAiAssistant() {
   if (AI_WORKER_URL && AI_WORKER_URL.trim() !== "") {
     aiEnabled = true;
+    // 显示模式切换栏
+    const modeBar = document.getElementById("aiModeBar");
+    if (modeBar) modeBar.style.display = "flex";
     // 在标题旁添加 AI 徽章
     const titleEl = document.querySelector(".chat-title");
     if (titleEl && !titleEl.querySelector(".ai-badge")) {
@@ -1489,6 +1496,7 @@ function initAiAssistant() {
     }
   } else {
     // 未配置 Worker URL，隐藏模式切换栏，使用传统自动回复
+    aiEnabled = false;
     const modeBar = document.getElementById("aiModeBar");
     if (modeBar) modeBar.style.display = "none";
   }
