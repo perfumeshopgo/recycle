@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Enquiry</title>
+</head>
+<body style="margin:0;padding:0;background-color:#e8f0ec;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#e8f0ec" style="background-color:#e8f0ec;padding:24px 12px;">
+<tr><td align="center">
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(10,61,40,0.12);">
+
+    <!-- HEADER -->
+    <tr>
+      <td bgcolor="#0a3d28" align="center" style="background-color:#0a3d28;padding:28px 36px 24px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+        <tr>
+          <td bgcolor="#145037" align="center" valign="middle" style="background-color:#145037;width:48px;height:48px;border-radius:10px;">
+            <span style="display:block;font-size:22px;font-weight:800;color:#ffffff;line-height:48px;">&#x21BB;</span>
+          </td>
+          <td style="padding-left:14px;">
+            <div style="font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;line-height:1.2;">Uni-Recycle Go</div>
+            <div style="font-size:11px;color:#a8d5bf;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px;">Global Sourcing</div>
+          </td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ALERT BAR -->
+    <tr>
+      <td bgcolor="#eff6ff" style="background-color:#eff6ff;padding:10px 36px;border-bottom:1px solid #bfdbfe;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tr>
+          <td style="width:24px;vertical-align:middle;font-size:16px;color:#2563eb;">&#9993;</td>
+          <td style="font-size:13px;font-weight:700;color:#1e40af;letter-spacing:0.2px;">NEW STOCK ENQUIRY — Action Required</td>
+          <td align="right" style="font-size:11px;color:#6b7280;">{{submit_time}}</td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- BODY -->
+    <tr>
+      <td style="padding:32px 36px 28px;">
+
+        <div style="font-size:22px;font-weight:700;color:#0a3d28;margin-bottom:6px;letter-spacing:-0.3px;">New Stock Enquiry</div>
+        <div style="font-size:14px;color:#6b7280;margin-bottom:24px;line-height:1.5;">A potential supplier has submitted a stock enquiry. Review the details and respond within 24 hours.</div>
+
+        <!-- Details card -->
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#f8fbf9" style="background-color:#f8fbf9;border:1px solid #e2ebe6;border-radius:12px;overflow:hidden;">
+
+          <tr>
+            <td bgcolor="#f8fbf9" style="background-color:#f8fbf9;padding:14px 20px;border-bottom:1px solid #e2ebe6;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="width:28px;vertical-align:top;font-size:15px;color:#1a6b45;">&#x1F464;</td>
+                <td style="width:120px;"><div style="font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">Name</div></td>
+                <td><div style="font-size:15px;font-weight:700;color:#111827;">{{from_name}}</div></td>
+              </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td bgcolor="#ffffff" style="background-color:#ffffff;padding:14px 20px;border-bottom:1px solid #e2ebe6;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="width:28px;vertical-align:top;font-size:15px;color:#1a6b45;">&#x1F3E2;</td>
+                <td style="width:120px;"><div style="font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">Company</div></td>
+                <td><div style="font-size:15px;font-weight:600;color:#111827;">{{company}}</div></td>
+              </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td bgcolor="#f8fbf9" style="background-color:#f8fbf9;padding:14px 20px;border-bottom:1px solid #e2ebe6;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="width:28px;vertical-align:top;font-size:15px;color:#1a6b45;">&#x2709;</td>
+                <td style="width:120px;"><div style="font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">Email</div></td>
+                <td><div style="font-size:14px;font-weight:600;color:#2563eb;">{{reply_to}}</div></td>
+              </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td bgcolor="#ffffff" style="background-color:#ffffff;padding:14px 20px;border-bottom:1px solid #e2ebe6;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="width:28px;vertical-align:top;font-size:15px;color:#1a6b45;">&#x1F30D;</td>
+                <td style="width:120px;"><div style="font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">Country</div></td>
+                <td><div style="font-size:15px;font-weight:600;color:#111827;">{{country}}</div></td>
+              </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td bgcolor="#f8fbf9" style="background-color:#f8fbf9;padding:14px 20px;border-bottom:1px solid #e2ebe6;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="width:28px;vertical-align:top;font-size:15px;color:#1a6b45;">&#x1F4F1;</td>
+                <td style="width:120px;"><div style="font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">Brand</div></td>
+                <td><div style="font-size:15px;font-weight:700;color:#1a6b45;">{{brand}}</div></td>
+              </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td bgcolor="#ffffff" style="background-color:#ffffff;padding:14px 20px;border-bottom:1px solid #e2ebe6;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="width:28px;vertical-align:top;font-size:15px;color:#1a6b45;">&#x1F4E6;</td>
+                <td style="width:120px;"><div style="font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">Quantity</div></td>
+                <td><div style="font-size:15px;font-weight:700;color:#1a6b45;">{{quantity}}</div></td>
+              </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td bgcolor="#f8fbf9" style="background-color:#f8fbf9;padding:16px 20px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td style="width:28px;vertical-align:top;font-size:15px;color:#1a6b45;">&#x1F4DD;</td>
+                <td>
+                  <div style="font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Stock Description</div>
+                  <div style="font-size:14px;color:#374151;line-height:1.6;">{{message}}</div>
+                </td>
+              </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+
+        <!-- CTA -->
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:24px;"><tr><td align="center">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td bgcolor="#1a6b45" align="center" style="background-color:#1a6b45;border-radius:10px;">
+            <a href="mailto:{{reply_to}}" style="display:inline-block;padding:13px 32px;font-size:14px;font-weight:700;color:#ffffff;text-decoration:none;letter-spacing:0.3px;">Reply to Supplier &rarr;</a>
+          </td></tr></table>
+        </td></tr></table>
+
+        <div style="font-size:12px;color:#9ca3af;text-align:center;margin-top:12px;">Target response time: within 24 hours</div>
+
+      </td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+      <td bgcolor="#0a3d28" align="center" style="background-color:#0a3d28;padding:24px 36px;">
+        <div style="font-size:13px;font-weight:700;color:#ffffff;margin-bottom:4px;">Uni-Recycle Go</div>
+        <div style="font-size:11px;color:#8ab8a3;line-height:1.6;">Hong Kong / China &middot; Faulty &amp; Old Smartphone Buyer<br>unirecyclego@outlook.com &middot; +852 0000 0000</div>
+        <div style="margin-top:14px;font-size:10px;color:#5a8a73;">This is an automated notification from your website enquiry form.</div>
+      </td>
+    </tr>
+
+  </table>
+</td></tr></table>
+</body>
+</html>
