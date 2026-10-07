@@ -48,15 +48,18 @@ COMPANY FACTS (use these exactly, do not invent):
 - Website: https://perfumeshopgo.github.io/recycle/
 
 HANDLING COMMON QUESTIONS:
-- Pricing: Never quote specific prices. Say: "Pricing depends on model, grade, quantity and market conditions. Please submit your stock list via our enquiry form or email for a custom quote within 24 hours."
+- CORE RULE: If the question is outside the COMPANY FACTS above, or you are unsure of the answer, DO NOT invent or guess. Immediately say: "For this question, please email us at unirecyclego@outlook.com and we will get back to you shortly."
+- Pricing: Never quote prices. Direct to email: "Pricing depends on model, grade, quantity and market conditions. Please email your stock list to unirecyclego@outlook.com for a custom quote."
 - MOQ: Explain 50+ units for first orders, container loads preferred
 - What we buy: Emphasize faulty/Grade F is our core, but all conditions accepted
 - Payment: Explain terms by relationship stage (new vs established)
 - Shipping: Explain we handle logistics based on agreed Incoterm
+- Any question requiring personal judgment, custom evaluation, or specific numbers → direct to email immediately
 
 CONVERSION BEHAVIOR:
-- After answering, proactively encourage: "For a custom quote, send your stock list (brand, model, quantity, grade) to unirecyclego@outlook.com or use our enquiry form."
-- For complex or pricing questions, always direct to the enquiry form or email
+- Keep answers SHORT and FAST — under 80 words for simple questions
+- After answering a simple question, add: "For more details or a quote, email unirecyclego@outlook.com."
+- For complex, pricing, or uncertain questions — do NOT attempt a full answer. Just say: "Please email us at unirecyclego@outlook.com and we will get back to you shortly."
 - Do not ask users to call — we do not publish a phone number`,
 
   translation: `You are a professional business translator for Uni-Recycle Go, an international B2B smartphone trading company.
@@ -277,23 +280,29 @@ export default {
       }
       messages.push({ role: "user", content: userMessage });
 
-      // 优先用 Gemini，失败则回退到 Cloudflare AI
+      // 优先用 Cloudflare AI（快，3-5秒），失败则回退到 Gemini（质量高但慢）
       let result;
-      let provider = "gemini";
-      let geminiErrorMsg = null;
+      let provider = "cloudflare";
+      let fallbackErrorMsg = null;
 
-      if (env.GEMINI_API_KEY) {
+      if (env.CLOUDFLARE_ACCOUNT_ID && env.CLOUDFLARE_API_TOKEN) {
         try {
-          result = await callGemini(env.GEMINI_API_KEY, systemPrompt, messages, mode);
-        } catch (geminiError) {
-          geminiErrorMsg = geminiError.message;
-          console.error("Gemini API failed, falling back to Cloudflare AI:", geminiErrorMsg);
-          provider = "cloudflare";
           result = await callCloudflareAI(env, systemPrompt, messages, mode);
+        } catch (cfError) {
+          fallbackErrorMsg = cfError.message;
+          console.error("Cloudflare AI failed, falling back to Gemini:", fallbackErrorMsg);
+          if (env.GEMINI_API_KEY) {
+            provider = "gemini";
+            result = await callGemini(env.GEMINI_API_KEY, systemPrompt, messages, mode);
+          } else {
+            throw cfError;
+          }
         }
+      } else if (env.GEMINI_API_KEY) {
+        provider = "gemini";
+        result = await callGemini(env.GEMINI_API_KEY, systemPrompt, messages, mode);
       } else {
-        provider = "cloudflare";
-        result = await callCloudflareAI(env, systemPrompt, messages, mode);
+        throw new Error("No AI provider configured");
       }
 
       return new Response(JSON.stringify({
@@ -301,7 +310,7 @@ export default {
         mode: mode,
         model: result.model,
         provider: provider,
-        gemini_error: geminiErrorMsg,
+        fallback_error: fallbackErrorMsg,
         usage: result.usage
       }), {
         status: 200,
