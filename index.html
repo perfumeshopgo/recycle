@@ -1411,7 +1411,7 @@ async function botReplyAi(userText) {
         message: userText,
         mode: currentAiMode,
         history: chatHistory,
-        language: currentLang
+        language: document.documentElement.lang || "en"
       })
     });
 
