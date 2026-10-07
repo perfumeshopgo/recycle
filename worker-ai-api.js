@@ -1,29 +1,26 @@
 /**
  * Cloudflare Worker — Uni-Recycle Go AI Assistant API
  *
- * 功能：代理 Cloudflare Workers AI 请求，隐藏 API Token，处理 CORS
- * 免费额度：每天 10,000 Neurons（约可进行 200-500 次对话）
+ * 功能：代理 AI 请求，隐藏 API Key，处理 CORS
+ * 双提供商：Google Gemini（优先）+ Cloudflare Workers AI（回退）
  *
  * 部署步骤：
  * 1. 注册 Cloudflare 账号（免费）：https://dash.cloudflare.com/sign-up
  * 2. 获取 Account ID：登录后在 Workers & Pages 页面查看
- * 3. 创建 API Token：https://dash.cloudflare.com/profile/api-tokens
- *    - 选择 "Create Token" → "Workers AI (beta)" 模板
- *    - 权限：Account.Workers AI:Edit
- * 4. 安装 Wrangler CLI：npm install -g wrangler
- * 5. 登录：wrangler login
- * 6. 创建 Worker：wrangler init uni-recycle-ai
- * 7. 将此文件内容复制到 src/index.js
- * 8. 设置 Secrets：
+ * 3. 创建 Cloudflare API Token：https://dash.cloudflare.com/profile/api-tokens
+ * 4. 获取 Google Gemini API Key：https://aistudio.google.com/apikey
+ * 5. 安装 Wrangler CLI：npm install -g wrangler
+ * 6. 登录：wrangler login
+ * 7. 设置 Secrets：
  *    wrangler secret put CLOUDFLARE_ACCOUNT_ID
  *    wrangler secret put CLOUDFLARE_API_TOKEN
- * 9. 部署：wrangler deploy
- * 10. 获取 Worker URL（如 https://uni-recycle-ai.your-subdomain.workers.dev）
- * 11. 在网站中配置 AI_WORKER_URL 变量
+ *    wrangler secret put GEMINI_API_KEY
+ * 8. 部署：wrangler deploy
  */
 
 // ============ 配置 ============
-const AI_MODEL = "@cf/meta/llama-3.2-3b-instruct";
+const CF_AI_MODEL = "@cf/meta/llama-3.2-3b-instruct";
+const GEMINI_MODEL = "gemini-3.5-flash";
 
 // 系统提示词模板 — 根据不同模式设置 AI 角色
 const SYSTEM_PROMPTS = {
@@ -142,6 +139,96 @@ const CORS_HEADERS = {
   "Content-Type": "application/json"
 };
 
+// ============ Gemini API 调用 ============
+async function callGemini(apiKey, systemPrompt, messages, mode) {
+  // 转换 OpenAI 格式为 Gemini 格式
+  const contents = [];
+  for (const msg of messages) {
+    if (msg.role === "system") continue; // system 用 systemInstruction
+    const role = msg.role === "assistant" ? "model" : "user";
+    contents.push({
+      role: role,
+      parts: [{ text: msg.content }]
+    });
+  }
+
+  const requestBody = {
+    contents: contents,
+    systemInstruction: {
+      parts: [{ text: systemPrompt }]
+    },
+    generationConfig: {
+      maxOutputTokens: mode === "marketing" ? 700 : 600,
+      temperature: mode === "marketing" ? 0.8 : 0.4
+    }
+  };
+
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody)
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const errorMsg = data.error?.message || data.error?.status || "Gemini API error";
+    throw new Error(`Gemini API ${response.status}: ${errorMsg}`);
+  }
+
+  const reply = data.candidates?.[0]?.content?.parts?.[0]?.text
+    || data.candidates?.[0]?.content?.parts?.map(p => p.text).join("")
+    || "Sorry, I couldn't generate a response.";
+
+  return {
+    reply: reply,
+    model: `google/${GEMINI_MODEL}`,
+    usage: data.usageMetadata || null
+  };
+}
+
+// ============ Cloudflare Workers AI 调用（回退） ============
+async function callCloudflareAI(env, systemPrompt, messages, mode) {
+  const accountId = env.CLOUDFLARE_ACCOUNT_ID;
+  const apiToken = env.CLOUDFLARE_API_TOKEN;
+
+  if (!accountId || !apiToken) {
+    throw new Error("Cloudflare AI secrets not configured");
+  }
+
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/v1/chat/completions`,
+    {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiToken}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: CF_AI_MODEL,
+        messages: messages,
+        max_tokens: mode === "marketing" ? 700 : 600,
+        temperature: mode === "marketing" ? 0.8 : 0.4
+      })
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(`Cloudflare AI ${response.status}: ${data.errors?.[0]?.message || "error"}`);
+  }
+
+  return {
+    reply: data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.",
+    model: `cloudflare/${CF_AI_MODEL}`,
+    usage: data.usage || null
+  };
+}
+
 // ============ 主处理函数 ============
 export default {
   async fetch(request, env) {
@@ -172,7 +259,7 @@ export default {
       // 获取系统提示词
       let systemPrompt = SYSTEM_PROMPTS[mode] || SYSTEM_PROMPTS.customer_service;
 
-      // 翻译模式：将目标语言注入系统提示词（高权重），并附加到用户消息
+      // 翻译模式：将目标语言注入系统提示词
       let userMessage = message;
       if (mode === "translation") {
         const targetLang = language || "English";
@@ -180,73 +267,42 @@ export default {
         userMessage = `Translate to ${targetLang}: ${message}`;
       }
 
-      // 构建消息历史
-      const messages = [
-        { role: "system", content: systemPrompt }
-      ];
-
-      // 添加历史对话（最多保留 10 轮，控制 token 用量）
+      // 构建消息历史（OpenAI 格式，两个提供商共用）
+      const messages = [{ role: "system", content: systemPrompt }];
       const recentHistory = history.slice(-10);
       for (const msg of recentHistory) {
         if (msg.role === "user" || msg.role === "assistant") {
           messages.push({ role: msg.role, content: msg.content });
         }
       }
-
-      // 添加当前用户消息
       messages.push({ role: "user", content: userMessage });
 
-      // 调用 Cloudflare Workers AI
-      const accountId = env.CLOUDFLARE_ACCOUNT_ID;
-      const apiToken = env.CLOUDFLARE_API_TOKEN;
+      // 优先用 Gemini，失败则回退到 Cloudflare AI
+      let result;
+      let provider = "gemini";
+      let geminiErrorMsg = null;
 
-      if (!accountId || !apiToken) {
-        return new Response(JSON.stringify({
-          error: "Server configuration missing. Please set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN secrets."
-        }), {
-          status: 500,
-          headers: CORS_HEADERS
-        });
-      }
-
-      const aiResponse = await fetch(
-        `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/v1/chat/completions`,
-        {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${apiToken}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            model: AI_MODEL,
-            messages: messages,
-            max_tokens: mode === "marketing" ? 700 : 600,
-            temperature: mode === "marketing" ? 0.8 : 0.4
-          })
+      if (env.GEMINI_API_KEY) {
+        try {
+          result = await callGemini(env.GEMINI_API_KEY, systemPrompt, messages, mode);
+        } catch (geminiError) {
+          geminiErrorMsg = geminiError.message;
+          console.error("Gemini API failed, falling back to Cloudflare AI:", geminiErrorMsg);
+          provider = "cloudflare";
+          result = await callCloudflareAI(env, systemPrompt, messages, mode);
         }
-      );
-
-      const aiData = await aiResponse.json();
-
-      if (!aiResponse.ok) {
-        console.error("AI API error:", aiData);
-        return new Response(JSON.stringify({
-          error: aiData.errors?.[0]?.message || "AI service error",
-          details: aiData
-        }), {
-          status: aiResponse.status,
-          headers: CORS_HEADERS
-        });
+      } else {
+        provider = "cloudflare";
+        result = await callCloudflareAI(env, systemPrompt, messages, mode);
       }
 
-      const reply = aiData.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
-
-      // 返回回复
       return new Response(JSON.stringify({
-        reply: reply,
+        reply: result.reply,
         mode: mode,
-        model: AI_MODEL,
-        usage: aiData.usage || null
+        model: result.model,
+        provider: provider,
+        gemini_error: geminiErrorMsg,
+        usage: result.usage
       }), {
         status: 200,
         headers: CORS_HEADERS
