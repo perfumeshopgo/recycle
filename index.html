@@ -155,11 +155,11 @@
   h1,h2,h3,h4 { font-family: 'Space Grotesk', 'Noto Sans SC', 'Noto Sans TC', 'Noto Sans JP', 'Noto Sans KR', 'Noto Sans Thai', sans-serif; letter-spacing: -0.02em; }
   a { color: inherit; text-decoration: none; }
   .lang-switcher { position: relative; }
-  .lang-btn { display: flex; align-items: center; gap: 6px; background: none; border: 1.5px solid var(--border); padding: 8px 14px; border-radius: 100px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-mid); font-family: inherit; transition: all .2s; }
+  .lang-btn { display: flex; align-items: center; gap: 6px; background: none; border: 1.5px solid var(--border); padding: 8px 14px; border-radius: 100px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-mid); font-family: inherit; transition: border-color .2s, color .2s; }
   .lang-btn:hover { border-color: var(--green-400); color: var(--green-700); }
   .lang-btn .arrow { font-size: 10px; transition: transform .2s; }
   .lang-switcher.open .lang-btn .arrow { transform: rotate(180deg); }
-  .lang-dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: white; border-radius: 14px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); padding: 6px; min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all .2s; z-index: 200; }
+  .lang-dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: white; border-radius: 14px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); padding: 6px; min-width: 180px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .2s, transform .2s, visibility .2s; z-index: 200; }
   .lang-switcher.open .lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
   .lang-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-size: 14px; color: var(--text-mid); transition: background .15s; white-space: nowrap; }
   .lang-option:hover { background: var(--green-50); color: var(--green-700); }
@@ -195,7 +195,7 @@
   .hero h1 .accent { background: linear-gradient(120deg, var(--green-600), var(--green-400)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .hero p.lead { font-size: 17.5px; color: var(--text-mid); max-width: 540px; margin-bottom: 34px; line-height: 1.75; }
   .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
-  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 32px; border-radius: 100px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; transition: all .2s; font-family: inherit; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 32px; border-radius: 100px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; transition: transform .2s, box-shadow .2s, background-color .2s, border-color .2s; font-family: inherit; }
   .btn svg { width:16px; height:16px; }
   .btn-primary { background: var(--green-600); color: white; box-shadow: 0 6px 24px rgba(31,157,107,0.3); }
   .btn-primary:hover { background: var(--green-700); transform: translateY(-2px); }
@@ -241,7 +241,7 @@
   .metric .lbl { font-size: 13px; color: var(--text-light); margin-top: 4px; font-weight: 500; }
   .products { background: var(--green-bg); }
   .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-  .product-card { background: white; border-radius: var(--radius); padding: 30px 26px; box-shadow: var(--shadow-sm); transition: all .3s; border: 1px solid var(--border); position: relative; overflow: hidden; }
+  .product-card { background: white; border-radius: var(--radius); padding: 30px 26px; box-shadow: var(--shadow-sm); transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease; border: 1px solid var(--border); position: relative; overflow: hidden; }
   .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--green-500), var(--green-400)); transform: scaleX(0); transition: transform .3s; }
   .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
   .product-card:hover::before { transform: scaleX(1); }
@@ -435,7 +435,7 @@
   .faq-item:hover { box-shadow: var(--shadow-sm); }
 
   .lang-dropdown { backdrop-filter: blur(12px); }
-  .lang-option { transition: all 0.15s ease; }
+  .lang-option { transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease; }
   .lang-option:hover { transform: translateX(4px); }
 
   /* Product images */
@@ -509,7 +509,7 @@
   .chat-msg.bot { background: white; border-bottom-left-radius: 4px; align-self: flex-start; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
   .chat-msg.user { background: var(--green-600); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
   .chat-quick { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px; background: #f7faf8; flex-shrink: 0; }
-  .chat-quick-btn { background: white; border: 1px solid var(--green-200); color: var(--green-700); padding: 6px 12px; border-radius: 16px; font-size: 12px; cursor: pointer; transition: all 0.15s ease; font-family: inherit; }
+  .chat-quick-btn { background: white; border: 1px solid var(--green-200); color: var(--green-700); padding: 6px 12px; border-radius: 16px; font-size: 12px; cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease; font-family: inherit; }
   .chat-quick-btn:hover { background: var(--green-50); border-color: var(--green-400); }
   .chat-input-area { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #e8ede9; background: white; flex-shrink: 0; }
   .chat-input { flex: 1; border: 1px solid #d5ddd8; border-radius: 20px; padding: 9px 16px; font-size: 14px; outline: none; font-family: inherit; transition: border-color 0.15s ease; }
@@ -531,7 +531,7 @@
 
   /* === AI Assistant Mode Switcher === */
   .ai-mode-bar { display: flex; gap: 4px; padding: 8px 12px; background: #f0f5f2; border-bottom: 1px solid #e0e8e3; flex-shrink: 0; overflow-x: auto; }
-  .ai-mode-btn { flex: 1; min-width: fit-content; padding: 6px 10px; border: 1px solid transparent; background: transparent; color: #5a6b62; font-size: 11px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.15s ease; font-family: inherit; white-space: nowrap; display: flex; align-items: center; gap: 4px; justify-content: center; }
+  .ai-mode-btn { flex: 1; min-width: fit-content; padding: 6px 10px; border: 1px solid transparent; background: transparent; color: #5a6b62; font-size: 11px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease; font-family: inherit; white-space: nowrap; display: flex; align-items: center; gap: 4px; justify-content: center; }
   .ai-mode-btn:hover { background: white; color: var(--green-700); }
   .ai-mode-btn.active { background: var(--green-600); color: white; border-color: var(--green-600); }
   .ai-mode-btn .ai-icon { width: 12px; height: 12px; flex-shrink: 0; }
@@ -562,6 +562,65 @@
   @keyframes shimmerLine { 0%{background-position:-200% 0;} 100%{background-position:200% 0;} }
   .trust-bar { position: relative; overflow: hidden; }
   .trust-bar::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent); background-size:200% 100%; animation:shimmerLine 3s linear infinite; }
+
+  /* === Accessibility: focus-visible === */
+  :focus-visible { outline: 2.5px solid var(--green-600); outline-offset: 2px; border-radius: 4px; }
+  .btn:focus-visible, .form-submit:focus-visible { outline: 2.5px solid var(--green-700); outline-offset: 3px; }
+  .nav-links > a:focus-visible, .footer-col a:focus-visible, .footer-bottom-links a:focus-visible { outline: 2px solid var(--green-600); outline-offset: 2px; }
+  .lang-btn:focus-visible, .menu-toggle:focus-visible, .chat-fab:focus-visible, .chat-close:focus-visible, .chat-send:focus-visible { outline: 2.5px solid var(--green-600); outline-offset: 2px; }
+
+  /* === Back to top button === */
+  .back-to-top { position: fixed; bottom: 24px; left: 24px; z-index: 9997; width: 48px; height: 48px; border-radius: 50%; background: var(--green-700); color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; }
+  .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .back-to-top:hover { background: var(--green-800); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+  .back-to-top svg { width: 20px; height: 20px; }
+
+  /* === Touch target minimum === */
+  .btn { min-height: 48px; }
+  .lang-btn { min-height: 44px; }
+  .menu-toggle { min-width: 44px; min-height: 44px; }
+  .nav-links > a { padding: 10px 0; min-height: 44px; display: inline-flex; align-items: center; }
+  .form-submit { min-height: 48px; }
+  .faq-q { min-height: 44px; }
+  .chat-send { min-width: 44px; min-height: 44px; }
+  .chat-close { min-width: 44px; min-height: 44px; }
+
+  /* === Footer social links === */
+  .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+  .footer-social a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.8); transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+  .footer-social a:hover { background: var(--green-600); color: white; transform: translateY(-2px); }
+  .footer-social svg { width: 18px; height: 18px; }
+  .footer-email-link { color: rgba(255,255,255,0.8); font-size: 14px; transition: color 0.2s ease; }
+  .footer-email-link:hover { color: white; }
+
+  /* === Tabular numbers for metrics === */
+  .metric .num, .step-circle, .grade-label { font-variant-numeric: tabular-nums; }
+
+  /* === Asymmetric why-grid (bento feel) === */
+  .why-grid { grid-template-columns: repeat(3, 1fr); }
+  .why-card.featured { grid-column: span 2; }
+  @media (max-width: 768px) {
+    .why-card.featured { grid-column: span 1; }
+  }
+
+  /* === Hero mobile optimization === */
+  @media (max-width: 768px) {
+    .hero { padding: 40px 20px 48px; min-height: auto; }
+    .hero h1 { font-size: clamp(30px, 8vw, 40px); }
+    .hero p.lead { font-size: 15.5px; margin-bottom: 24px; }
+    .hero-buttons { margin-bottom: 28px; }
+    .hero-img-wrap img { border-radius: 18px; }
+    section { padding: 56px 20px; }
+    .back-to-top { bottom: 16px; left: 16px; width: 44px; height: 44px; }
+  }
+
+  /* === prefers-reduced-motion: disable animations === */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .fade-in-up, .fade-in-left, .fade-in-right, .scale-in, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
+    html { scroll-behavior: auto; }
+    .back-to-top { transition: none; }
+  }
 </style>
 </head>
 <body id="top">
@@ -650,7 +709,7 @@
     </div>
     <div class="hero-visual fade-in-right delay-2">
       <div class="hero-img-wrap">
-        <picture><source srcset="assets/hero-phones.webp" type="image/webp"><img src="assets/hero-phones.jpg" alt="Used smartphones collection" loading="eager" fetchpriority="high"></picture>
+        <picture><source srcset="assets/hero-phones.webp" type="image/webp"><img src="assets/hero-phones.jpg" alt="Used smartphones collection" width="480" height="360" loading="eager" fetchpriority="high"></picture>
         <div class="float-badge b1"><div class="badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div><span data-i18n="badge1">Container Loads</span><small data-i18n="badge1_sub">Monthly Shipments</small></div></div>
         <div class="float-badge b2"><div class="badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div><span data-i18n="badge2">QC Inspection</span><small data-i18n="badge2_sub">Every Batch</small></div></div>
       </div>
@@ -878,7 +937,7 @@
       <p data-i18n="why_desc">We're not looking for one-off deals. We're building a network of reliable suppliers who trust us to deliver fair prices and consistent volume.</p>
     </div>
     <div class="why-grid reveal-stagger">
-      <div class="why-card tilt-card scale-in"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h4 data-i18n="why1_title">Competitive Pricing</h4><p data-i18n="why1_desc">Direct access to Asian end-buyers means better margins for suppliers. No unnecessary middlemen marking down your stock. We price based on real market data, not guesswork.</p></div>
+      <div class="why-card tilt-card scale-in featured"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h4 data-i18n="why1_title">Competitive Pricing</h4><p data-i18n="why1_desc">Direct access to Asian end-buyers means better margins for suppliers. No unnecessary middlemen marking down your stock. We price based on real market data, not guesswork.</p></div>
       <div class="why-card tilt-card scale-in"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4 data-i18n="why2_title">Clear Grading</h4><p data-i18n="why2_desc">We use industry-standard grading (A/B/C/Faulty) with written definitions shared upfront. No surprises on arrival, no unfair regrading, no post-shipment price haggling.</p></div>
       <div class="why-card tilt-card scale-in"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><h4 data-i18n="why3_title">Fast Payment</h4><p data-i18n="why3_desc">Established suppliers enjoy flexible payment terms including TT, LC and escrow. We understand cash flow matters and pay on schedule, every time.</p></div>
       <div class="why-card tilt-card scale-in"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h4 data-i18n="why4_title">Hong Kong Desk</h4><p data-i18n="why4_desc">Based in Hong Kong with direct access to mainland China buyers — the world's largest market for used smartphones. We understand both sides of the trade.</p></div>
@@ -939,20 +998,20 @@
       <div class="contact-form fade-in-right delay-2">
         <h4 data-i18n="form_title">Send Your Enquiry</h4>
         <p class="form-sub" data-i18n="form_sub">Fill in the form below and we'll respond within 24 business hours.</p>
-        <form id="enquiryForm" onsubmit="submitEnquiryForm(event);">
+        <form id="enquiryForm" method="POST" onsubmit="submitEnquiryForm(event);">
           <div class="form-row">
-            <div class="form-group"><label for="form-name" data-i18n="form_name">Your Name *</label><input type="text" id="form-name" required></div>
-            <div class="form-group"><label for="form-company" data-i18n="form_company">Company</label><input type="text" id="form-company"></div>
+            <div class="form-group"><label for="form-name" data-i18n="form_name">Your Name *</label><input type="text" id="form-name" name="name" required data-i18n-ph="ph_name" placeholder="Your full name"></div>
+            <div class="form-group"><label for="form-company" data-i18n="form_company">Company</label><input type="text" id="form-company" name="company" data-i18n-ph="ph_company" placeholder="Company or organisation"></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label for="form-email" data-i18n="form_email">Email *</label><input type="email" id="form-email" required></div>
-            <div class="form-group"><label for="form-country" data-i18n="form_country">Country</label><input type="text" id="form-country"></div>
+            <div class="form-group"><label for="form-email" data-i18n="form_email">Email *</label><input type="email" id="form-email" name="email" required data-i18n-ph="ph_email" placeholder="you@company.com"></div>
+            <div class="form-group"><label for="form-country" data-i18n="form_country">Country</label><input type="text" id="form-country" name="country" data-i18n-ph="ph_country" placeholder="Your country"></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label for="form-brand" data-i18n="form_brand">Primary Brand</label><select id="form-brand"><option data-i18n="form_brand_ph">Select brand</option><option>iPhone (Apple)</option><option>Samsung</option><option>Google Pixel</option><option>Huawei</option><option>Xiaomi</option><option>OPPO</option><option>OnePlus</option><option data-i18n="form_brand_other">Other / Mixed</option></select></div>
-            <div class="form-group"><label for="form-qty" data-i18n="form_qty">Approx. Quantity</label><select id="form-qty"><option data-i18n="form_qty_ph">Select range</option><option>50 – 200 units</option><option>200 – 1,000 units</option><option>1,000 – 5,000 units</option><option>5,000+ units</option></select></div>
+            <div class="form-group"><label for="form-brand" data-i18n="form_brand">Primary Brand</label><select id="form-brand" name="brand"><option data-i18n="form_brand_ph">Select brand</option><option>iPhone (Apple)</option><option>Samsung</option><option>Google Pixel</option><option>Huawei</option><option>Xiaomi</option><option>OPPO</option><option>OnePlus</option><option data-i18n="form_brand_other">Other / Mixed</option></select></div>
+            <div class="form-group"><label for="form-qty" data-i18n="form_qty">Approx. Quantity</label><select id="form-qty" name="quantity"><option data-i18n="form_qty_ph">Select range</option><option>50 – 200 units</option><option>200 – 1,000 units</option><option>1,000 – 5,000 units</option><option>5,000+ units</option></select></div>
           </div>
-          <div class="form-group"><label for="form-desc" data-i18n="form_desc">Stock Description *</label><textarea id="form-desc" required></textarea></div>
+          <div class="form-group"><label for="form-desc" data-i18n="form_desc">Stock Description *</label><textarea id="form-desc" name="message" required data-i18n-ph="ph_message" placeholder="Brand, model, quantity, grade, known issues..."></textarea></div>
           <button type="submit" class="form-submit" data-i18n="form_submit">Send Enquiry &rarr;</button>
           <p class="form-note" data-i18n="form_note">We respond to all enquiries within 24 business hours. Your information is kept confidential.</p>
         </form>
@@ -968,6 +1027,15 @@
       <div class="footer-brand">
         <div class="logo"><div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/><rect x="9" y="9" width="6" height="9" rx="1" fill="currentColor" stroke="none" opacity="0.9"/></svg></div><span class="logo-text"><span class="brand" style="background:linear-gradient(135deg,#fff,#c7f0e0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Uni-Recycle Go</span><span class="sub" style="color:rgba(255,255,255,0.6);">Global Sourcing</span></span></div>
         <p data-i18n="footer_brand_desc">Hong Kong-based used smartphone sourcing specialist. Connecting global suppliers with the Asian market through fair pricing, clear grading and reliable logistics.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/unirecycle-go" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+          </a>
+          <a href="mailto:unirecyclego@outlook.com" aria-label="Email us" class="footer-email-link-inline" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);transition:background-color .2s,color .2s;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          </a>
+        </div>
+        <p style="margin-top:16px;font-size:13px;"><a href="mailto:unirecyclego@outlook.com" class="footer-email-link">unirecyclego@outlook.com</a></p>
       </div>
       <div class="footer-col">
         <h5 data-i18n="footer_company">COMPANY</h5>
@@ -1001,6 +1069,11 @@
     </div>
   </div>
 </footer>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 <!-- Chatbot -->
 <button class="chat-fab" id="chatFab" aria-label="Open chat" onclick="toggleChat()">
@@ -1065,6 +1138,9 @@ window.addEventListener("scroll", () => {
   const nav = document.querySelector("nav");
   if (window.scrollY > 20) nav.classList.add("scrolled");
   else nav.classList.remove("scrolled");
+  // Back to top button visibility
+  const btt = document.getElementById("backToTop");
+  if (btt) btt.classList.toggle("visible", window.scrollY > 500);
   // Scroll progress bar
   const scrollTop = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
