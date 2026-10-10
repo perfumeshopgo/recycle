@@ -444,8 +444,8 @@
   .about-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 28px; opacity: 0.18; }
   .about-icon-grid { position: relative; z-index: 1; }
   .hero-visual { position: relative; }
-  .hero-img-wrap { position: relative; width: 100%; max-width: 480px; }
-  .hero-img-wrap img { width: 100%; border-radius: 24px; box-shadow: 0 20px 60px rgba(15,81,50,0.18); display: block; }
+  .hero-img-wrap { position: relative; width: 100%; max-width: 480px; z-index: 1; }
+  .hero-img-wrap img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; border-radius: 24px; box-shadow: 0 20px 60px rgba(15,81,50,0.18); display: block; }
 
   .shipping-visual { position: relative; }
   .shipping-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 28px; opacity: 0.25; }
@@ -621,6 +621,34 @@
     html { scroll-behavior: auto; }
     .back-to-top { transition: none; }
   }
+
+  /* === Hero: breathing float + gradient overlay + decorative glow === */
+  .hero-img-wrap { animation: heroFloat 6s ease-in-out infinite; }
+  @keyframes heroFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  .hero-img-wrap::after { content:''; position:absolute; inset:0; border-radius:24px; pointer-events:none; background: linear-gradient(to top, rgba(15,81,50,0.32) 0%, rgba(15,81,50,0.06) 38%, rgba(15,81,50,0) 62%); }
+  .hero-visual { position: relative; }
+  .hero-visual::before, .hero-visual::after { content:''; position:absolute; border-radius:50%; z-index:0; pointer-events:none; }
+  .hero-visual::before { width:280px; height:280px; top:-50px; right:-40px; background: radial-gradient(circle, rgba(45,184,127,0.22), rgba(45,184,127,0) 68%); }
+  .hero-visual::after { width:220px; height:220px; bottom:-40px; left:-50px; background: radial-gradient(circle, rgba(20,108,67,0.18), rgba(20,108,67,0) 68%); }
+
+  /* === Gloss sweep on cards === */
+  .product-card, .term-card { position: relative; overflow: hidden; }
+  .product-card::after, .term-card::after { content:''; position:absolute; top:0; left:-80%; width:50%; height:100%; background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%); transform: skewX(-20deg); transition: left .7s ease; pointer-events:none; }
+  .product-card:hover::after, .term-card:hover::after { left: 130%; }
+
+  /* === Card hover border highlight === */
+  .qc-step, .why-card { transition: transform .4s ease, box-shadow .4s ease, border-color .3s ease; }
+  .qc-step:hover, .why-card:hover { border-color: var(--green-400); }
+
+  /* === Metric icons === */
+  .metric { display:flex; align-items:center; gap:14px; }
+  .metric .m-ic { width:42px; height:42px; border-radius:12px; background: linear-gradient(135deg, var(--green-100), var(--green-200)); display:flex; align-items:center; justify-content:center; color: var(--green-600); flex-shrink:0; }
+  .metric .m-ic svg { width:20px; height:20px; }
+  .metric .num { font-variant-numeric: tabular-nums; }
+
+  /* === Decorative dot texture + soft divider === */
+  .dot-texture { background-image: radial-gradient(rgba(15,81,50,0.055) 1px, transparent 1.2px); background-size: 22px 22px; }
+  .section-divider { height:1px; border:0; background: linear-gradient(90deg, transparent, rgba(15,81,50,0.16), transparent); margin:0; }
 </style>
 </head>
 <body id="top">
@@ -709,7 +737,7 @@
     </div>
     <div class="hero-visual fade-in-right delay-2">
       <div class="hero-img-wrap">
-        <picture><source srcset="assets/hero-phones.webp" type="image/webp"><img src="assets/hero-phones.jpg" alt="Used smartphones collection" width="480" height="360" loading="eager" fetchpriority="high"></picture>
+        <picture><source srcset="assets/hero-phones.webp" type="image/webp"><img src="assets/hero-phones.jpg" alt="Used smartphones collection" width="1600" height="1200" loading="eager" fetchpriority="high"></picture>
         <div class="float-badge b1"><div class="badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div><span data-i18n="badge1">Container Loads</span><small data-i18n="badge1_sub">Monthly Shipments</small></div></div>
         <div class="float-badge b2"><div class="badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div><span data-i18n="badge2">QC Inspection</span><small data-i18n="badge2_sub">Every Batch</small></div></div>
       </div>
@@ -731,7 +759,7 @@
   <div class="section-inner">
     <div class="about-grid">
       <div class="about-visual fade-in-left">
-        <picture><source srcset="assets/about-warehouse.webp" type="image/webp"><img src="assets/about-warehouse.jpg" alt="Quality control warehouse" loading="lazy"></picture>
+        <picture><source srcset="assets/about-warehouse.webp" type="image/webp"><img src="assets/about-warehouse.jpg" alt="Quality control warehouse" width="2364" height="1773" loading="lazy"></picture>
         <div class="about-icon-grid">
           <div class="about-icon-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="t" data-i18n="about_ic1">Global Sourcing</div></div>
           <div class="about-icon-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="t" data-i18n="about_ic2">Quality Check</div></div>
@@ -750,9 +778,9 @@
           <div class="about-feature"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="about_f3">Dedicated account manager for every supplier relationship</span></div>
         </div>
         <div class="about-metrics">
-          <div class="metric"><div class="num">4+</div><div class="lbl" data-i18n="about_m1">Source Continents</div></div>
-          <div class="metric"><div class="num">100%</div><div class="lbl" data-i18n="about_m2">Tested Devices</div></div>
-          <div class="metric"><div class="num">24h</div><div class="lbl" data-i18n="about_m3">Quote Turnaround</div></div>
+          <div class="metric"><div class="m-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div><div class="num" data-count="4" data-suffix="+">4+</div><div class="lbl" data-i18n="about_m1">Source Continents</div></div></div>
+          <div class="metric"><div class="m-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div><div><div class="num" data-count="100" data-suffix="%">100%</div><div class="lbl" data-i18n="about_m2">Tested Devices</div></div></div>
+          <div class="metric"><div class="m-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="num" data-count="24" data-suffix="h">24h</div><div class="lbl" data-i18n="about_m3">Quote Turnaround</div></div></div>
         </div>
       </div>
     </div>
@@ -760,7 +788,7 @@
 </section>
 
 <!-- Products -->
-<section class="products" id="products">
+<section class="products dot-texture" id="products">
   <div class="section-inner">
     <div class="section-head fade-in-up">
       <div class="eyebrow" data-i18n="products_eyebrow">WHAT WE SOURCE</div>
@@ -769,28 +797,28 @@
     </div>
     <div class="product-grid reveal-stagger">
       <div class="product-card tilt-card scale-in">
-        <picture><source srcset="assets/product-samsung.webp" type="image/webp"><img class="product-img" src="assets/product-samsung.jpg" alt="Faulty Samsung Galaxy phones for parts" loading="lazy"></picture>
+        <picture><source srcset="assets/product-samsung.webp" type="image/webp"><img class="product-img" src="assets/product-samsung.jpg" alt="Faulty Samsung Galaxy phones for parts" width="2048" height="2048" loading="lazy"></picture>
         <h4 data-i18n="prod1_name">Samsung Galaxy</h4>
         <p data-i18n="prod1_desc">Our largest volume — all Galaxy S, Note, Z Fold/Flip and A-series. Faulty, cracked and non-functional units all purchased. Old models especially welcome.</p>
         <div class="product-models"><strong data-i18n="prod_models_label">Key models:</strong> <span data-i18n="prod1_models">S24 to S5, Note series, Z Fold/Flip, A-series</span></div>
         <div class="tag" data-i18n="prod1_tag">CORE FOCUS</div>
       </div>
       <div class="product-card tilt-card scale-in">
-        <picture><source srcset="assets/product-pixel.webp" type="image/webp"><img class="product-img" src="assets/product-pixel.jpg" alt="Faulty Google Pixel phones for parts" loading="lazy"></picture>
+        <picture><source srcset="assets/product-pixel.webp" type="image/webp"><img class="product-img" src="assets/product-pixel.jpg" alt="Faulty Google Pixel phones for parts" width="2048" height="2048" loading="lazy"></picture>
         <h4 data-i18n="prod2_name">Google Pixel</h4>
         <p data-i18n="prod2_desc">All Pixel generations — faulty, cracked and non-functional units purchased. Old Pixel models especially wanted for parts.</p>
         <div class="product-models"><strong data-i18n="prod_models_label">Key models:</strong> <span data-i18n="prod2_models">Pixel 8 to Pixel 1, all Pro & a models</span></div>
         <div class="tag" data-i18n="prod2_tag">HIGH DEMAND</div>
       </div>
       <div class="product-card tilt-card scale-in">
-        <picture><source srcset="assets/product-other.webp" type="image/webp"><img class="product-img" src="assets/product-other.jpg" alt="Chinese brand faulty phones Huawei Xiaomi OPPO" loading="lazy"></picture>
+        <picture><source srcset="assets/product-other.webp" type="image/webp"><img class="product-img" src="assets/product-other.jpg" alt="Chinese brand faulty phones Huawei Xiaomi OPPO" width="2048" height="2048" loading="lazy"></picture>
         <h4 data-i18n="prod3_name">Chinese Brands</h4>
         <p data-i18n="prod3_desc">Huawei, Xiaomi, OPPO, OnePlus, vivo, realme and more. Faulty and old models all accepted for parts evaluation.</p>
         <div class="product-models"><strong data-i18n="prod_models_label">Key models:</strong> <span data-i18n="prod3_models">Xiaomi Mi/Redmi, OPPO Find/Reno, Huawei Mate/P</span></div>
         <div class="tag" data-i18n="prod3_tag">GROWING</div>
       </div>
       <div class="product-card tilt-card scale-in">
-        <picture><source srcset="assets/product-legacy.webp" type="image/webp"><img class="product-img" src="assets/product-legacy.jpg" alt="Old and legacy smartphones for parts dismantling" loading="lazy"></picture>
+        <picture><source srcset="assets/product-legacy.webp" type="image/webp"><img class="product-img" src="assets/product-legacy.jpg" alt="Old and legacy smartphones for parts dismantling" width="2508" height="1672" loading="lazy"></picture>
         <h4 data-i18n="prod4_name">Legacy & Other</h4>
         <p data-i18n="prod4_desc">Sony Xperia, LG, Motorola, Nokia, Asus and other legacy brands. Old and faulty units especially welcome — the older, the better for parts.</p>
         <div class="product-models"><strong data-i18n="prod_models_label">Key models:</strong> <span data-i18n="prod4_models">Sony Xperia, LG, Motorola, Nokia, legacy models</span></div>
@@ -820,7 +848,7 @@
       </table>
     </div>
     <div class="section-image fade-in-up delay-2">
-      <picture><source srcset="assets/grading-quality.webp" type="image/webp"><img src="assets/grading-quality.jpg" alt="Professional grading and quality inspection of used smartphones" loading="lazy"></picture>
+      <picture><source srcset="assets/grading-quality.webp" type="image/webp"><img src="assets/grading-quality.jpg" alt="Professional grading and quality inspection of used smartphones" width="2508" height="1672" loading="lazy"></picture>
     </div>
   </div>
 </section>
@@ -840,7 +868,7 @@
       <div class="qc-step tilt-card scale-in"><div class="step-num">4</div><div class="qc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h4 data-i18n="qc4_title">Arrival Reconciliation</h4><p data-i18n="qc4_desc">On arrival, we reconcile the shipment against the agreed list. Any discrepancies are documented and resolved fairly.</p></div>
     </div>
     <div class="section-image fade-in-up delay-2">
-      <picture><source srcset="assets/qc-process.webp" type="image/webp"><img src="assets/qc-process.jpg" alt="QC testing process for used smartphones with diagnostic equipment" loading="lazy"></picture>
+      <picture><source srcset="assets/qc-process.webp" type="image/webp"><img src="assets/qc-process.jpg" alt="QC testing process for used smartphones with diagnostic equipment" width="2508" height="1672" loading="lazy"></picture>
     </div>
   </div>
 </section>
@@ -859,7 +887,7 @@
       <div class="process-step fade-in-up"><div class="step-circle">3</div><h4 data-i18n="proc3_title">Ship & Get Paid</h4><p data-i18n="proc3_desc">Container loading coordinated, export documents handled. Payment on agreed terms — fast and dependable.</p></div>
     </div>
     <div class="section-image fade-in-up delay-2">
-      <picture><source srcset="assets/process-logistics.webp" type="image/webp"><img src="assets/process-logistics.jpg" alt="Logistics packaging warehouse for used smartphones shipping" loading="lazy"></picture>
+      <picture><source srcset="assets/process-logistics.webp" type="image/webp"><img src="assets/process-logistics.jpg" alt="Logistics packaging warehouse for used smartphones shipping" width="2508" height="1672" loading="lazy"></picture>
     </div>
   </div>
 </section>
@@ -879,7 +907,7 @@
         </div>
       </div>
       <div class="shipping-visual fade-in-right delay-2">
-        <picture><source srcset="assets/shipping-port.webp" type="image/webp"><img src="assets/shipping-port.jpg" alt="Shipping port with containers" loading="lazy"></picture>
+        <picture><source srcset="assets/shipping-port.webp" type="image/webp"><img src="assets/shipping-port.jpg" alt="Shipping port with containers" width="2730" height="1536" loading="lazy"></picture>
         <h4 data-i18n="trade_title">Accepted Trade Terms</h4>
         <div class="trade-terms">
           <div class="term-card">
@@ -929,7 +957,7 @@
 </section>
 
 <!-- Why -->
-<section class="why" id="why">
+<section class="why dot-texture" id="why">
   <div class="section-inner">
     <div class="section-head fade-in-up">
       <div class="eyebrow" data-i18n="why_eyebrow">WHY CHOOSE US</div>
@@ -945,7 +973,7 @@
       <div class="why-card tilt-card scale-in"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4 data-i18n="why6_title">Compliance First</h4><p data-i18n="why6_desc">We operate within all applicable regulations — IMEI checks, export controls, and environmental standards. Your reputation is safe with us.</p></div>
     </div>
     <div class="section-image fade-in-up delay-2">
-      <picture><source srcset="assets/why-partnership.webp" type="image/webp"><img src="assets/why-partnership.jpg" alt="International business partnership meeting with global suppliers" loading="lazy"></picture>
+      <picture><source srcset="assets/why-partnership.webp" type="image/webp"><img src="assets/why-partnership.jpg" alt="International business partnership meeting with global suppliers" width="2508" height="1672" loading="lazy"></picture>
     </div>
   </div>
 </section>
@@ -1033,6 +1061,9 @@
           </a>
           <a href="mailto:unirecyclego@outlook.com" aria-label="Email us" class="footer-email-link-inline" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);transition:background-color .2s,color .2s;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          </a>
+          <a href="https://perfumeshopgo.github.io/recycle/" target="_blank" rel="noopener" aria-label="Website" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);transition:background-color .2s,color .2s;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </a>
         </div>
         <p style="margin-top:16px;font-size:13px;"><a href="mailto:unirecyclego@outlook.com" class="footer-email-link">unirecyclego@outlook.com</a></p>
@@ -2469,6 +2500,32 @@ try { setLang(savedLang, persistPref); } catch(e) {}
     revealEls.forEach(function(el) { io.observe(el); });
   } else {
     revealEls.forEach(function(el) { el.classList.add('visible'); });
+  }
+
+  // Number count-up animation on metric numbers
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const countEls = document.querySelectorAll('.metric .num[data-count]');
+  if (!reducedMotion && 'IntersectionObserver' in window && countEls.length) {
+    const cio = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        cio.unobserve(el);
+        const target = parseInt(el.getAttribute('data-count'), 10);
+        const suffix = el.getAttribute('data-suffix') || '';
+        const dur = 1600;
+        const start = performance.now();
+        function tick(now) {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    countEls.forEach(function(el) { cio.observe(el); });
   }
 })();
 </script>
